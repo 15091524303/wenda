@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<div th:insert="~{header}"></div>
+<!--#parse("header.html")-->
+<link type="text/css" rel="stylesheet" th:href="@{../../styles/result.css}">
+<!--<link rel="stylesheet" href="../../styles/result.css">-->
+<!--<link rel="stylesheet" href="../../styles/detail.css">-->
+<link type="text/css" rel="stylesheet" th:href="@{../../styles/detail.css}">
+
+    <div id="main">
+        <div class="zg-wrap zu-main clearfix ">
+            <div class="zm-profile-section-wrap zm-profile-followee-page">
+                <div class="zm-profile-section-head">
+                    <span class="zm-profile-section-name">
+                        <a href="#" th:text="${curUser.name}">${curUser.name}</a> 关注了 <span th:text="${followeeCount}"></span> 人
+                    </span>
+                </div>
+                <div class="zm-profile-section-list">
+                    <div id="zh-profile-follows-list">
+                        <div class="zh-general-list clearfix">
+                            <div th:each="vo:${followees}">
+                            <!--#foreach($vo in $followees)-->
+                            <div class="zm-profile-card zm-profile-section-item zg-clear no-hovercard">
+                                <!--#if($vo.followed)-->
+                                <div th:if="${vo.get('followed')==true}">
+                                <div class="zg-right">
+                                    <button class="zg-btn zg-btn-unfollow zm-rich-follow-btn small nth-0
+                                    js-follow-user" data-status="1" th:data-id="${vo.get('user').id}">取消关注</button>
+                                </div>
+                                </div>
+                                <!--#else-->
+                                <div th:if="${vo.get('followed')!=true}">
+                                <div class="zg-right">
+                                    <button class="zg-btn zg-btn-follow zm-rich-follow-btn small nth-0
+                                    js-follow-user" th:data-id="${vo.get('user').id}">关注</button>
+                                </div>
+                                </div>
+                                <!--#end-->
+                                <!--th:href="/user/${vo.get('id')}"-->
+                                <a title="Barty" class="zm-item-link-avatar" th:href="/user/${vo.get('user').id}">
+                                    <img th:src="${vo.get('user').headUrl}" class="zm-item-img-avatar">
+                                </a>
+                                <div class="zm-list-content-medium">
+                                    <h2 class="zm-list-content-title"><a data-tip="p$t$buaabarty" th:href="/user/${vo.get('user').id}" class="zg-link" title="Barty"
+                                    th:text="${vo.get('user').name}">${vo.user.name}</a></h2>
+
+                                    <!-- <div class="zg-big-gray">计蒜客教研首席打杂</div> -->
+                                    <div class="details zg-gray">
+                                        <a target="_blank" href="/user/${vo.user.id}/followers" class="zg-link-gray-normal">
+                                            <span th:text="${vo.get('followerCount')}"></span>粉丝
+                                        </a>
+                                        /
+                                        <a target="_blank" href="/user/${vo.user.id}/followees" class="zg-link-gray-normal">
+                                            <span th:text="${vo.get('followerCount')}"></span>关注
+                                        </a>
+                                        /
+                                        <a target="_blank" href="#" class="zg-link-gray-normal">
+                                            <span th:text="${vo.get('commentCount')}"></span>回答
+                                        </a>
+                                        /
+                                        <a target="_blank" href="#" class="zg-link-gray-normal">548 赞同</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--#end-->
+                            </div>
+                        </div>
+                        <a aria-role="button" class="zg-btn-white zu-button-more">更多</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div th:insert="~{js}"></div>
+
+<!--#parse("js.html")-->
+<script type="text/javascript" th:src="@{/scripts/main/site/follow.js}"></script>
+<!--#parse("footer.html")-->
+<div th:insert="~{footer}"></div>
