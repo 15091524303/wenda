@@ -1,26 +1,23 @@
 package com.nowcoder.async;
 
-import sun.java2d.pipe.hw.AccelDeviceEventNotifier;
-
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class EventModel {
-    private EventType type;
-    private int actorId;
-    private int entityType;
-    private int entityId;
-    private int entityOwnerId;
+public class EventModel {   //定义事件模型
+    private EventType type;   //事件类型：点赞、评论、登录、邮件、关注、取消关注、提问
+    private int actorId;      //事件触发者的id
+    private int entityType;   //实体类型
+    private int entityId;     //实体id
+    private int entityOwnerId;  //实体所有者的id
 
-    private Map<String, String> exts = new HashMap<>();
+    private Map<String, String> exts = new HashMap<>();   //拓展字段
 
     public EventModel() {
 
     }
 
-    public EventModel setExt(String key, String value) {
+    public EventModel setExt(String key, String value) {  //各种get和set方法
         exts.put(key, value);
         return this;
     }

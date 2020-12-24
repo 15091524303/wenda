@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-public class FeedHandler implements EventHandler {
+public class FeedHandler implements EventHandler {   //推拉模型还不完善
     @Autowired
     FollowService followService;
 
@@ -32,26 +32,26 @@ public class FeedHandler implements EventHandler {
     QuestionService questionService;
 
 
-    private String buildFeedData(EventModel model) {
+    private String buildFeedData(EventModel model) {   //得到事件模型对应的具体实体
         Map<String, String> map = new HashMap<>();
         // 触发用户是通用的
-        User actor = userService.getUser(model.getActorId());
+        User actor = userService.getUser(model.getActorId());  //得到事件触发者的id
         if (actor == null) {
             return null;
         }
-        map.put("userId", String.valueOf(actor.getId()));
-        map.put("userHead", actor.getHeadUrl());
-        map.put("userName", actor.getName());
+        map.put("userId", String.valueOf(actor.getId()));  //用户id
+        map.put("userHead", actor.getHeadUrl());//用户头像
+        map.put("userName", actor.getName());//用户姓名
 
-        if (model.getType() == EventType.COMMENT ||
+        if (model.getType() == EventType.COMMENT ||   //若事件类型是评论，或者 事件模型是对问题的关注
                 (model.getType() == EventType.FOLLOW  && model.getEntityType() == EntityType.ENTITY_QUESTION)) {
-            Question question = questionService.getById(model.getEntityId());
+            Question question = questionService.getById(model.getEntityId());   //得到具体的评论或者提问
             if (question == null) {
                 return null;
             }
-            map.put("questionId", String.valueOf(question.getId()));
-            map.put("questionTitle", question.getTitle());
-            return JSONObject.toJSONString(map);
+            map.put("questionId", String.valueOf(question.getId()));   //问题id
+            map.put("questionTitle", question.getTitle());//问题主题
+            return JSONObject.toJSONString(map);//对map序列化成json字符串
         }
         return null;
     }
@@ -88,6 +88,6 @@ public class FeedHandler implements EventHandler {
 
     @Override
     public List<EventType> getSupportEventTypes() {
-        return Arrays.asList(EventType.COMMENT, EventType.FOLLOW);
+        return Arrays.asList(EventType.COMMENT, EventType.FOLLOW);  //评论和关注类型
     }
 }
