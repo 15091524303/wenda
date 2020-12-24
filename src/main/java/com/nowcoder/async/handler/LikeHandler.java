@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class LikeHandler implements EventHandler {
+public class LikeHandler implements EventHandler {   //对点赞事件的处理
     @Autowired
     MessageService messageService;
 
@@ -27,10 +27,10 @@ public class LikeHandler implements EventHandler {
     @Override
     public void doHandle(EventModel model) {
         Message message = new Message();
-        message.setFromId(WendaUtil.SYSTEM_USERID);
-        message.setToId(model.getEntityOwnerId());
-        message.setCreatedDate(new Date());
-        User user = userService.getUser(model.getActorId());
+        message.setFromId(WendaUtil.SYSTEM_USERID);  //信息由系统发出
+        message.setToId(model.getEntityOwnerId());   //接收者的id
+        message.setCreatedDate(new Date());   //发起时间
+        User user = userService.getUser(model.getActorId());   //是谁点赞的
         message.setContent("用户" + user.getName()
                 + "赞了你的评论,http://127.0.0.1:8080/question/" + model.getExt("questionId"));
 
@@ -39,6 +39,6 @@ public class LikeHandler implements EventHandler {
 
     @Override
     public List<EventType> getSupportEventTypes() {
-        return Collections.singletonList(EventType.LIKE);
-    }
+        return Collections.singletonList(EventType.LIKE);  //处理点赞事件
+    }  //能处理的事件类型：点赞
 }
