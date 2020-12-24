@@ -16,7 +16,7 @@ import java.util.Map;
 @Service
 public class SearchService {
     private static final String SOLR_URL = "http://127.0.0.1:8983/solr/wenda";
-    private HttpSolrClient client = new HttpSolrClient.Builder(SOLR_URL).build();
+    private HttpSolrClient client = new HttpSolrClient.Builder(SOLR_URL).build();   //全文搜索功能还没实现
     private static final String QUESTION_TITLE_FIELD = "question_title";
     private static final String QUESTION_CONTENT_FIELD = "question_content";
 
