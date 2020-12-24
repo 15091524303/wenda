@@ -10,8 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-/**
- * Created by nowcoder on 2016/7/10.
+/**8
  */
 @Aspect
 @Component
@@ -23,7 +22,7 @@ public class LogAspect {
         StringBuilder sb = new StringBuilder();
         for (Object arg : joinPoint.getArgs()) {
             if (arg != null) {
-                sb.append("arg:" + arg.toString() + "|");
+                sb.append("arg:").append(arg.toString()).append("|");
             }
         }
         logger.info("before method:" + sb.toString());

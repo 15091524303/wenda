@@ -19,9 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by nowcoder on 2016/7/30.
- */
 @Controller
 public class FollowController {
     @Autowired
@@ -154,7 +151,7 @@ public class FollowController {
     }
 
     private List<ViewObject> getUsersInfo(int localUserId, List<Integer> userIds) {
-        List<ViewObject> userInfos = new ArrayList<ViewObject>();
+        List<ViewObject> userInfos = new ArrayList<>();
         for (Integer uid : userIds) {
             User user = userService.getUser(uid);
             if (user == null) {

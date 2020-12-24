@@ -5,9 +5,6 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
-/**
- * Created by nowcoder on 2016/7/9.
- */
 @Mapper
 public interface CommentDAO {
     String TABLE_NAME = " comment ";

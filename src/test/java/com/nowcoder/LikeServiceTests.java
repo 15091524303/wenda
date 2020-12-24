@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-/**
- * Created by nowcoder on 2016/8/28.
- */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = WendaApplication.class)
 public class LikeServiceTests {

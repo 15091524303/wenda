@@ -19,9 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
-/**
- * Created by nowcoder on 2016/7/10.
- */
+
 //@Controller
 public class IndexController {
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
@@ -68,21 +66,21 @@ public class IndexController {
                            HttpSession httpSession,
                           @CookieValue("JSESSIONID") String sessionId) {
         StringBuilder sb = new StringBuilder();
-        sb.append("COOKIEVALUE:" + sessionId);
+        sb.append("COOKIEVALUE:").append(sessionId);
         Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String name = headerNames.nextElement();
-            sb.append(name + ":" + request.getHeader(name) + "<br>");
+            sb.append(name).append(":").append(request.getHeader(name)).append("<br>");
         }
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
-                sb.append("Cookie:" + cookie.getName() + " value:" + cookie.getValue());
+                sb.append("Cookie:").append(cookie.getName()).append(" value:").append(cookie.getValue());
             }
         }
-        sb.append(request.getMethod() + "<br>");
-        sb.append(request.getQueryString() + "<br>");
-        sb.append(request.getPathInfo() + "<br>");
-        sb.append(request.getRequestURI() + "<br>");
+        sb.append(request.getMethod()).append("<br>");
+        sb.append(request.getQueryString()).append("<br>");
+        sb.append(request.getPathInfo()).append("<br>");
+        sb.append(request.getRequestURI()).append("<br>");
 
         response.addHeader("nowcoderId", "hello");
         response.addCookie(new Cookie("username", "nowcoder"));

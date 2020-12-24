@@ -22,9 +22,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by nowcoder on 2016/7/9.
- */
 @Controller
 public class MessageController {
     private static final Logger logger = LoggerFactory.getLogger(MessageController.class);

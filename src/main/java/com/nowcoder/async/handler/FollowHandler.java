@@ -13,12 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by nowcoder on 2016/7/30.
- */
+
 @Component
 public class FollowHandler implements EventHandler {
     @Autowired
@@ -48,6 +47,6 @@ public class FollowHandler implements EventHandler {
 
     @Override
     public List<EventType> getSupportEventTypes() {
-        return Arrays.asList(EventType.FOLLOW);
+        return Collections.singletonList(EventType.FOLLOW);
     }
 }

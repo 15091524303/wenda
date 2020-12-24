@@ -16,9 +16,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import java.util.Properties;
 
-/**
- * Created by nowcoder on 2016/7/15. // course@nowcoder.com NKnk66
- */
 @Service
 public class MailSender implements InitializingBean {
     private static final Logger logger = LoggerFactory.getLogger(MailSender.class);

@@ -3,7 +3,6 @@ package com.nowcoder.controller;
 import com.nowcoder.model.Comment;
 import com.nowcoder.model.EntityType;
 import com.nowcoder.model.HostHolder;
-import com.nowcoder.model.ViewObject;
 import com.nowcoder.service.CommentService;
 import com.nowcoder.service.QuestionService;
 import com.nowcoder.service.SensitiveService;
@@ -13,22 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StreamUtils;
+
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.HtmlUtils;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-/**
- * Created by nowcoder on 2016/7/2.
- */
 @Controller
 public class CommentController {
     private static final Logger logger = LoggerFactory.getLogger(CommentController.class);

@@ -9,14 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-/**
- * Created by nowcoder on 2016/7/30.
- */
+
 @Component
 public class LoginExceptionHandler implements EventHandler {
 
@@ -39,6 +34,6 @@ public class LoginExceptionHandler implements EventHandler {
 
     @Override
     public List<EventType> getSupportEventTypes() {
-        return Arrays.asList(EventType.LOGIN);
+        return Collections.singletonList(EventType.LOGIN);
     }
 }

@@ -1,8 +1,5 @@
 package com.nowcoder.util;
 
-/**
- * Created by nowcoder on 2016/7/30.
- */
 public class RedisKeyUtil {
     private static String SPLIT = ":";
     private static String BIZ_LIKE = "LIKE";
@@ -16,21 +13,21 @@ public class RedisKeyUtil {
     private static String BIZ_TIMELINE = "TIMELINE";
 
     public static String getLikeKey(int entityType, int entityId) {
-        return BIZ_LIKE + SPLIT + String.valueOf(entityType) + SPLIT + String.valueOf(entityId);
+        return BIZ_LIKE + SPLIT + entityType + SPLIT +entityId;
     }
 
     public static String getDisLikeKey(int entityType, int entityId) {
-        return BIZ_DISLIKE + SPLIT + String.valueOf(entityType) + SPLIT + String.valueOf(entityId);
+        return BIZ_DISLIKE + SPLIT + entityType + SPLIT + entityId;
     }
 
     // 某个实体的粉丝key
     public static String getFollowerKey(int entityType, int entityId) {
-        return BIZ_FOLLOWER + SPLIT + String.valueOf(entityType) + SPLIT + String.valueOf(entityId);
+        return BIZ_FOLLOWER + SPLIT + entityType + SPLIT + entityId;
     }
 
     // 每个用户对某类实体的关注key
     public static String getFolloweeKey(int userId, int entityType) {
-        return BIZ_FOLLOWEE + SPLIT + String.valueOf(userId) + SPLIT + String.valueOf(entityType);
+        return BIZ_FOLLOWEE + SPLIT + userId + SPLIT + entityType;
     }
 
     public static String getEventQueueKey() {
@@ -38,7 +35,7 @@ public class RedisKeyUtil {
     }
 
     public static String getTimelineKey(int userId) {
-        return BIZ_TIMELINE + SPLIT + String.valueOf(userId);
+        return BIZ_TIMELINE + SPLIT + userId;
     }
 
 

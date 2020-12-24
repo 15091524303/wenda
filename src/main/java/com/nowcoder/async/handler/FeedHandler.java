@@ -14,9 +14,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-/**
- * Created by nowcoder on 2016/7/30.
- */
 @Component
 public class FeedHandler implements EventHandler {
     @Autowired
@@ -36,7 +33,7 @@ public class FeedHandler implements EventHandler {
 
 
     private String buildFeedData(EventModel model) {
-        Map<String, String> map = new HashMap<String ,String>();
+        Map<String, String> map = new HashMap<>();
         // 触发用户是通用的
         User actor = userService.getUser(model.getActorId());
         if (actor == null) {
@@ -91,6 +88,6 @@ public class FeedHandler implements EventHandler {
 
     @Override
     public List<EventType> getSupportEventTypes() {
-        return Arrays.asList(new EventType[]{EventType.COMMENT, EventType.FOLLOW});
+        return Arrays.asList(EventType.COMMENT, EventType.FOLLOW);
     }
 }

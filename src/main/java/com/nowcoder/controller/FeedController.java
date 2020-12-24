@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by nowcoder on 2016/7/15.
- */
 @Controller
 public class FeedController {
     private static final Logger logger = LoggerFactory.getLogger(FeedController.class);
@@ -41,7 +38,7 @@ public class FeedController {
     private String getPushFeeds(Model model) {
         int localUserId = hostHolder.getUser() != null ? hostHolder.getUser().getId() : 0;
         List<String> feedIds = jedisAdapter.lrange(RedisKeyUtil.getTimelineKey(localUserId), 0, 10);
-        List<Feed> feeds = new ArrayList<Feed>();
+        List<Feed> feeds = new ArrayList<>();
         for (String feedId : feedIds) {
             Feed feed = feedService.getById(Integer.parseInt(feedId));
             if (feed != null) {

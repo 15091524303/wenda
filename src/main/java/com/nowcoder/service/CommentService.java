@@ -8,9 +8,7 @@ import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
 
-/**
- * Created by nowcoder on 2016/7/9.
- */
+
 @Service
 public class CommentService {
     @Autowired

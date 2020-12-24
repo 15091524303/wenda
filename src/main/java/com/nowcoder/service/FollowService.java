@@ -14,9 +14,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by rainday on 16/8/11.
- */
 @Service
 public class FollowService {
     @Autowired
@@ -24,9 +21,9 @@ public class FollowService {
 
     /**
      * 用户关注了某个实体,可以关注问题,关注用户,关注评论等任何实体
-     * @param userId
-     * @param entityType
-     * @param entityId
+     * @param userId 用户id
+     * @param entityType 关注的实体类型
+     * @param entityId 关注的实体ID
      * @return
      */
     public boolean follow(int userId, int entityType, int entityId) {
@@ -45,9 +42,9 @@ public class FollowService {
 
     /**
      * 取消关注
-     * @param userId
-     * @param entityType
-     * @param entityId
+     * @param userId  哪个用户取消的关注
+     * @param entityType 取消了对什么实体的关注
+     * @param entityId 取消了对哪个实体的关注
      * @return
      */
     public boolean unfollow(int userId, int entityType, int entityId) {
@@ -104,9 +101,9 @@ public class FollowService {
 
     /**
      *  判断用户是否关注了某个实体
-     * @param userId
-     * @param entityType
-     * @param entityId
+     * @param userId 用户id
+     * @param entityType 关注的实体类型
+     * @param entityId 关注的实体id
      * @return
      */
     public boolean isFollower(int userId, int entityType, int entityId) {
