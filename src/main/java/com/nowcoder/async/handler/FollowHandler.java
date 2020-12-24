@@ -19,7 +19,7 @@ import java.util.List;
 
 
 @Component
-public class FollowHandler implements EventHandler {
+public class FollowHandler implements EventHandler {   //对于关注事件的处理   ,对用户的关注功能尚未实现完全
     @Autowired
     MessageService messageService;
 
@@ -29,15 +29,15 @@ public class FollowHandler implements EventHandler {
     @Override
     public void doHandle(EventModel model) {
         Message message = new Message();
-        message.setFromId(WendaUtil.SYSTEM_USERID);
+        message.setFromId(WendaUtil.SYSTEM_USERID);   //站内信的发起者是系统
         message.setToId(model.getEntityOwnerId());
-        message.setCreatedDate(new Date());
-        User user = userService.getUser(model.getActorId());
+        message.setCreatedDate(new Date());//日期
+        User user = userService.getUser(model.getActorId());//动作发起者的User对象
 
-        if (model.getEntityType() == EntityType.ENTITY_QUESTION) {
+        if (model.getEntityType() == EntityType.ENTITY_QUESTION) {   //对问题的关注
             message.setContent("用户" + user.getName()
                     + "关注了你的问题,http://127.0.0.1:8080/question/" + model.getEntityId());
-        } else if (model.getEntityType() == EntityType.ENTITY_USER) {
+        } else if (model.getEntityType() == EntityType.ENTITY_USER) {  //对用户的关注
             message.setContent("用户" + user.getName()
                     + "关注了你,http://127.0.0.1:8080/user/" + model.getActorId());
         }
@@ -48,5 +48,5 @@ public class FollowHandler implements EventHandler {
     @Override
     public List<EventType> getSupportEventTypes() {
         return Collections.singletonList(EventType.FOLLOW);
-    }
+    }   //处理的事件类型：关注
 }

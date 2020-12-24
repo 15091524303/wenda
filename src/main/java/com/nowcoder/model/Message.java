@@ -2,14 +2,14 @@ package com.nowcoder.model;
 
 import java.util.Date;
 
-public class Message {
-    private int id;
-    private int fromId;
-    private int toId;
-    private String content;
-    private Date createdDate;
-    private int hasRead;
-    private String conversationId;
+public class Message {   //站内信
+    private int id;      //在数据库中建表
+    private int fromId;  //信息发起者的id
+    private int toId;   //接收者的id
+    private String content;  //内容
+    private Date createdDate;//日期
+    private int hasRead;  //是否已读
+    private String conversationId;   //会话id
 
     public int getId() {
         return id;
@@ -59,7 +59,7 @@ public class Message {
         this.hasRead = hasRead;
     }
 
-    public String getConversationId() {
+    public String getConversationId() {    //对会话id进行处理，
         if (fromId < toId) {
             return String.format("%d_%d", fromId, toId);
         }
