@@ -27,12 +27,12 @@ public class LoginController {
     @Autowired
     EventProducer eventProducer;
 
-    @RequestMapping(value = "/reg/",method = RequestMethod.GET)
-    public String reg(){
-        return "login";
-    }
+//    @RequestMapping(value = "/reg/",method = RequestMethod.GET)
+//    public String reg(){
+//        return "login";
+//    }
 
-    @RequestMapping(path = {"/reg/"}, method = {RequestMethod.POST})
+    @RequestMapping(path = {"/reg/"}, method = {RequestMethod.POST,RequestMethod.GET})
     public String reg(Model model, @RequestParam("username") String username,
                       @RequestParam("password") String password,
                       @RequestParam("next") String next,
@@ -74,7 +74,7 @@ public class LoginController {
 //        return "login";
 //    }
 
-    @RequestMapping(path = {"/login/"}, method = {RequestMethod.POST})
+    @RequestMapping(path = {"/login/"}, method = {RequestMethod.POST,RequestMethod.GET})
     public String login(Model model, @RequestParam("username") String username,
                         @RequestParam("password") String password,
                         @RequestParam(value="next", required = false) String next,
@@ -90,9 +90,13 @@ public class LoginController {
                 }
                 response.addCookie(cookie);
 
-                eventProducer.fireEvent(new EventModel(EventType.LOGIN)
-                        .setExt("username", username).setExt("email", "15091524303@163.com")
-                        .setActorId((int)map.get("userId")));
+                if(username!=null){
+                    map.put("userId",userService.selectByName(username).getId());
+                }
+//这里暂时不需要对登录事件进行处理
+//                eventProducer.fireEvent(new EventModel(EventType.LOGIN)
+////                        .setExt("username", username).setExt("email", "15091524303@163.com")
+////                        .setActorId((int)map.get("userId")));
 
 
                 if (StringUtils.isNotBlank(next)) {

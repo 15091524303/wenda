@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 
-@Component
+//@Component
 public class LoginExceptionHandler implements EventHandler {   //登录异常处理   发送邮件，通知登录异常
 
 //    @Autowired
