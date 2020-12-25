@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class FeedController {
+public class FeedController {   //推拉功能尚未成功实现
     private static final Logger logger = LoggerFactory.getLogger(FeedController.class);
 
     @Autowired
