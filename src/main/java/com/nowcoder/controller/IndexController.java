@@ -1,6 +1,5 @@
 package com.nowcoder.controller;
 
-import com.nowcoder.aspect.LogAspect;
 import com.nowcoder.model.User;
 import com.nowcoder.service.WendaService;
 import org.slf4j.Logger;
@@ -21,7 +20,7 @@ import java.util.*;
 
 
 //@Controller
-public class IndexController {
+public class IndexController {   //只是作为练习，不属于网站搭建的一部分
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
     @Autowired
@@ -47,7 +46,7 @@ public class IndexController {
     @RequestMapping(path = {"/vm"}, method = {RequestMethod.GET})
     public String template(Model model) {
         model.addAttribute("value1", "vvvvv1");
-        List<String> colors = Arrays.asList(new String[]{"RED", "GREEN", "BLUE"});
+        List<String> colors = Arrays.asList("RED", "GREEN", "BLUE");
         model.addAttribute("colors", colors);
 
         Map<String, String> map = new HashMap<>();
