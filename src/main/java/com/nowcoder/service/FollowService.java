@@ -24,7 +24,7 @@ public class FollowService {
      * @param userId 用户id
      * @param entityType 关注的实体类型
      * @param entityId 关注的实体ID
-     * @return
+     * @return 是否关注成功
      */
     public boolean follow(int userId, int entityType, int entityId) {
         String followerKey = RedisKeyUtil.getFollowerKey(entityType, entityId);
@@ -32,29 +32,28 @@ public class FollowService {
         Date date = new Date();
         // 实体的粉丝增加当前用户
         Jedis jedis = jedisAdapter.getJedis();
-        Transaction tx = jedisAdapter.multi(jedis);
-        tx.zadd(followerKey, date.getTime(), String.valueOf(userId));
+        Transaction tx = jedisAdapter.multi(jedis);   //标记一个事务的开始
+        tx.zadd(followerKey, date.getTime(), String.valueOf(userId));  //有序集合，将当前时间作为score
         // 当前用户对这类实体关注+1
         tx.zadd(followeeKey, date.getTime(), String.valueOf(entityId));
-        List<Object> ret = jedisAdapter.exec(tx, jedis);
-        return ret.size() == 2 && (Long) ret.get(0) > 0 && (Long) ret.get(1) > 0;
+        List<Object> ret = jedisAdapter.exec(tx, jedis);  //执行事务块内的所有命令
+        return ret.size() == 2 && (Long) ret.get(0) > 0 && (Long) ret.get(1) > 0;  //执行了两条命令，两条命令都执行成功，则返回true
     }
 
     /**
      * 取消关注
-     * @param userId  哪个用户取消的关注
-     * @param entityType 取消了对什么实体的关注
-     * @param entityId 取消了对哪个实体的关注
-     * @return
+     * @param userId  取消了对谁的关注
+     * @param entityType 取消了对什么类型实体的关注
+     * @param entityId 取消了对该类型的哪个实体的关注
+     * @return  是否取消关注成功
      */
     public boolean unfollow(int userId, int entityType, int entityId) {
         String followerKey = RedisKeyUtil.getFollowerKey(entityType, entityId);
         String followeeKey = RedisKeyUtil.getFolloweeKey(userId, entityType);
-        Date date = new Date();
+//        Date date = new Date();  //用不到这个
         Jedis jedis = jedisAdapter.getJedis();
         Transaction tx = jedisAdapter.multi(jedis);
-        // 实体的粉丝增加当前用户
-        tx.zrem(followerKey, String.valueOf(userId));
+        tx.zrem(followerKey, String.valueOf(userId));   //从关注的有序集合中移除当前用户
         // 当前用户对这类实体关注-1
         tx.zrem(followeeKey, String.valueOf(entityId));
         List<Object> ret = jedisAdapter.exec(tx, jedis);
