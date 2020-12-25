@@ -215,9 +215,11 @@ public class JedisAdapter implements InitializingBean {
         return false;
     }
 
-    public List<String> brpop(int timeout, String key) {
+    public List<String> brpop(int timeout, String key) {   //列表的阻塞式弹出
         try (Jedis jedis = pool.getResource()) {
-            return jedis.brpop(timeout, key);
+            //BRPOP 是列表的阻塞式(blocking)弹出原语
+            return jedis.brpop(timeout, key);//它是 RPOP key 命令的阻塞版本，当给定列表内没有任何元素可供弹出的时候，连接将被 BRPOP 命令阻塞，直到等待超时或发现可弹出元素为止。
+
         } catch (Exception e) {
             logger.error("发生异常" + e.getMessage());
         }
