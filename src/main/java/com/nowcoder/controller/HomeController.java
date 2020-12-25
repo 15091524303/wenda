@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class HomeController {
+public class HomeController {  //网站首页
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired
