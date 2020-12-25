@@ -9,8 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Component
-//public class WendaWebConfiguration extends WebMvcConfigurerAdapter {
-public class WendaWebConfiguration implements WebMvcConfigurer {
+public class WendaWebConfiguration implements WebMvcConfigurer {  //添加拦截器，实现WebMvcConfigurer接口
     @Autowired
     PassportInterceptor passportInterceptor;
 

@@ -19,11 +19,11 @@ import org.springframework.web.util.HtmlUtils;
 import java.util.Date;
 
 @Controller
-public class CommentController {
+public class CommentController {   //对提问的评论
     private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
 
     @Autowired
-    HostHolder hostHolder;
+    HostHolder hostHolder;   //在threadLocal中的当前线程的用户信息
 
     @Autowired
     UserService userService;
@@ -38,25 +38,25 @@ public class CommentController {
     SensitiveService sensitiveService;
 
     @RequestMapping(path = {"/addComment"}, method = {RequestMethod.POST})
-    public String addComment(@RequestParam("questionId") int questionId,
+    public String addComment(@RequestParam("questionId") int questionId,       //添加评论
                              @RequestParam("content") String content) {
         try {
-            content = HtmlUtils.htmlEscape(content);
-            content = sensitiveService.filter(content);
             // 过滤content
-            Comment comment = new Comment();
-            if (hostHolder.getUser() != null) {
+            content = HtmlUtils.htmlEscape(content);     //对内容先过滤一遍html的干扰
+            content = sensitiveService.filter(content);   //过滤敏感词
+            Comment comment = new Comment();   //创建一个评论对象
+            if (hostHolder.getUser() != null) {    //若当前有用户登录，评论的userId即为当前的User的Id
                 comment.setUserId(hostHolder.getUser().getId());
             } else {
-                comment.setUserId(WendaUtil.ANONYMOUS_USERID);
+                comment.setUserId(WendaUtil.ANONYMOUS_USERID);  //若当前用户没有登录，则评论的userId即为系统匿名用户的Id
             }
             comment.setContent(content);
             comment.setEntityId(questionId);
-            comment.setEntityType(EntityType.ENTITY_QUESTION);
+            comment.setEntityType(EntityType.ENTITY_QUESTION);    //对问题的评论
             comment.setCreatedDate(new Date());
-            comment.setStatus(0);
+            comment.setStatus(0);   //0表示正常评论
 
-            commentService.addComment(comment);
+            commentService.addComment(comment);   //敏感词过滤过滤了两遍----------------------------------------------------------
             // 更新题目里的评论数量
             int count = commentService.getCommentCount(comment.getEntityId(), comment.getEntityType());
             questionService.updateCommentCount(comment.getEntityId(), count);

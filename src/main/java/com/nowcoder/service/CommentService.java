@@ -22,8 +22,8 @@ public class CommentService {
     }
 
     public int addComment(Comment comment) {
-        comment.setContent(HtmlUtils.htmlEscape(comment.getContent()));
-        comment.setContent(sensitiveService.filter(comment.getContent()));
+//        comment.setContent(HtmlUtils.htmlEscape(comment.getContent()));
+//        comment.setContent(sensitiveService.filter(comment.getContent()));
         return commentDAO.addComment(comment);
     }
 
