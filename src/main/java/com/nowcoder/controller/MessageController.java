@@ -71,6 +71,9 @@ public class MessageController {
                 }
                 vo.set("headUrl", user.getHeadUrl());
                 vo.set("userId", user.getId());
+
+                int localUserId = hostHolder.getUser().getId();
+                messageService.setConvesationHasread(localUserId, msg.getConversationId());
                 messages.add(vo);
             }
             model.addAttribute("messages", messages);
