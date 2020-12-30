@@ -3,6 +3,7 @@ package com.nowcoder.controller;
 import com.nowcoder.model.EntityType;
 import com.nowcoder.model.Feed;
 import com.nowcoder.model.HostHolder;
+import com.nowcoder.model.User;
 import com.nowcoder.service.FeedService;
 import com.nowcoder.service.FollowService;
 import com.nowcoder.util.JedisAdapter;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class FeedController {   //推拉功能尚未成功实现
+public class FeedController {   //推拉功能尚未成功实现 先不把功能加入进来
     private static final Logger logger = LoggerFactory.getLogger(FeedController.class);
 
     @Autowired
@@ -35,8 +36,8 @@ public class FeedController {   //推拉功能尚未成功实现
     JedisAdapter jedisAdapter;
 
     @RequestMapping(path = {"/pushfeeds"}, method = {RequestMethod.GET, RequestMethod.POST})
-    private String getPushFeeds(Model model) {
-        int localUserId = hostHolder.getUser() != null ? hostHolder.getUser().getId() : 0;
+    public String getPushFeeds(Model model) {
+        int localUserId = hostHolder.getUser() != null ? hostHolder.getUser().getId() : 0;//用户是否登录
         List<String> feedIds = jedisAdapter.lrange(RedisKeyUtil.getTimelineKey(localUserId), 0, 10);
         List<Feed> feeds = new ArrayList<>();
         for (String feedId : feedIds) {
@@ -50,8 +51,9 @@ public class FeedController {   //推拉功能尚未成功实现
     }
 
     @RequestMapping(path = {"/pullfeeds"}, method = {RequestMethod.GET, RequestMethod.POST})
-    private String getPullFeeds(Model model) {
-        int localUserId = hostHolder.getUser() != null ? hostHolder.getUser().getId() : 0;
+    public String getPullFeeds(Model model) {
+        System.out.println(Thread.currentThread().getName()+"--->getPullFeeds");
+        int localUserId = hostHolder.getUser() != null ? hostHolder.getUser().getId() : 0;//用户是否登录
         List<Integer> followees = new ArrayList<>();
         if (localUserId != 0) {
             // 关注的人

@@ -8,7 +8,6 @@ import com.nowcoder.model.*;
 import com.nowcoder.service.*;
 import com.nowcoder.util.JedisAdapter;
 import com.nowcoder.util.RedisKeyUtil;
-//import org.apache.commons.lang3.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
