@@ -22,10 +22,7 @@
                 <div class="zu-main-feed-con navigable" data-feedtype="topstory" id="zh-question-list" data-widget="navigable" data-navigable-options="{&quot;items&quot;:&quot;&gt; .zh-general-list .feed-content&quot;,&quot;offsetTop&quot;:-82}">
                     <a href="javascript:;" class="zu-main-feed-fresh-button" id="zh-main-feed-fresh-button" style="display:none"></a>
                     <div id="js-home-feed-list" class="zh-general-list topstory clearfix" data-init="{&quot;params&quot;: {}, &quot;nodename&quot;: &quot;TopStory2FeedList&quot;}"
-                         data-delayed="true" data-za-module="TopStoryFeedList" >
-                        <!--th:each="vo:${vos}"-->
-                        <a th:each="vo:${vos}">
-                        <!--#foreach($vo in $vos)-->
+                         data-delayed="true" data-za-module="TopStoryFeedList" th:each="vo:${vos}">
                         <div class="feed-item folding feed-item-hook feed-item-2
                         " data-type="a" data-za-index="" data-za-module="FeedItem" feed-item-a="" id="feed-2">
 
@@ -72,7 +69,7 @@
                                                 <div class="zm-meta-panel">
                                                     <a data-follow="q:link" class="follow-link zg-follow meta-item" href="javascript:;" id="sfb-123114">
                                                         <i class="z-icon-follow"></i>关注问题</a>
-                                                    <a href="#" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
+                                                    <a th:href="@{'/question/'+${vo.get('question').id}}" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
                                                         <i class="z-icon-comment"></i>
                                                         <span th:text="${vo.get('question').commentCount}">m</span>条评论
                                                     </a>
@@ -88,8 +85,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!--#end-->
-                        </a>
                     </div>
                     <a href="javascript:;" id="zh-load-more" data-method="next" class="zg-btn-white zg-r3px zu-button-more" style="">更多</a>
                 </div>

@@ -11,6 +11,16 @@ public class Comment {
     private Date createdDate;
     private int status;  //用于区分正常评论和非正常评论
 
+    private int commentCount;
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
     public int getId() {
         return id;
     }

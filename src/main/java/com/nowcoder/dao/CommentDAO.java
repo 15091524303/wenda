@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface CommentDAO {
     String TABLE_NAME = " comment ";
-    String INSERT_FIELDS = " user_id, content, created_date, entity_id, entity_type, status ";
+    String INSERT_FIELDS = " user_id, content, created_date, entity_id, entity_type, status ,comment_count";
     String SELECT_FIELDS = " id, " + INSERT_FIELDS;
 
     @Insert({"insert into ", TABLE_NAME, "(", INSERT_FIELDS,
@@ -30,4 +30,7 @@ public interface CommentDAO {
 
     @Select({"select count(id) from ", TABLE_NAME, " where user_id=#{userId}"})
     int getUserCommentCount(int userId);
+
+    @Update({"update ", TABLE_NAME, " set comment_count = #{count} where id=#{id}"})
+    int updateCommentCount(int id, int count);
 }

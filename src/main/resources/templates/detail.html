@@ -125,12 +125,14 @@
                     <div class="zm-item-meta answer-actions clearfix js-contentActions">
                         <div class="zm-meta-panel">
                             <a itemprop="url" class="answer-data-link meta-item" target="_blank" href="">
-                                <!--今天是: <span th:text="${#dates.format(today,'yyyy-MM-dd')}">2018-04-25</span>-->
                                 发布于 <span th:text="${#dates.format(comment.get('comment').createdDate,'yyyy-MM-dd HH:mm:ss')}"></span>
                             </a>
-                            <a href="" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
+                            <!--th:href="@{'/question/'+${vo.get('question').id}}"-->
+                            <a th:href="'/comment/'+${comment.get('comment').id}" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
                                 <i class="z-icon-comment"></i>
-                                4 条评论
+                                <span th:text="${comment.get('comment').commentCount}">
+                                    4
+                                </span>条评论
                             </a>
 
                             <button class="item-collapse js-collapse" style="transition: none;">
@@ -161,7 +163,6 @@
                     </div>
                 </div>
             </form>
-
         </div>
     </div>
 </div>

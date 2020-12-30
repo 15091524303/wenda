@@ -38,14 +38,14 @@
                 </a>
                 </div>
                 <div class="letter-detail">
-                <a th:title="${conversation.get('user').name}" class="letter-name level-color-1" th:text="${conversation.get('user').name}">
-                    $conversation.user.name
-                </a>
-                <p class="letter-brief">
-                <a href="/msg/detail?conversationId=$conversation.conversation.conversationId" th:text="${conversation.get('conversation').content}">
-                $conversation.conversation.content
-                </a>
-                </p>
+                    <a th:title="${conversation.get('user').name}" class="letter-name level-color-1" th:text="${conversation.get('user').name}">
+                        $conversation.user.name
+                    </a>
+                    <p class="letter-brief">
+                        <a th:href="'/msg/detail?conversationId='+${conversation.get('conversation').conversationId}" th:text="${conversation.get('conversation').content}">
+                        $conversation.conversation.content
+                        </a>
+                    </p>
                 </div>
                 </li>
                 <!--#end-->
